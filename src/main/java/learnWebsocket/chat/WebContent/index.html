@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>chat</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		if (!window.WebSocket) {
+			alert("您的浏览器不支持websocket！"); 
+		}
+		/*
+		var url = location.href.substr(0, location.href.lastIndexOf('/'))
+				.replace('http', 'ws')
+				+ "/main/1234/432"
+		*/
+//		var url="ws://weiyinfu.cn:8080/chat/main/13/43"
+var url="wss://weiyinfu.cn/wss/chat/main/1234/432"	
+//可以打开：var url='ws://weiyinfu.cn:8080/chat/main/1234/432'
+console.log(url)
+		var wc = new WebSocket(url)
+		wc.onopen = function() {
+			console.log("open")
+		}
+		wc.onclose = function() {
+			console.log("close")
+		}
+		wc.onmessage = function(e) {
+			console.log("message")
+			console.log(e)
+		}
+		function sendMessage(msg) {
+			wc.send("i:" + msg)
+		}
+	</script>
+</body>
+</html>
